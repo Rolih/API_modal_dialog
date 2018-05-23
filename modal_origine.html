@@ -1,0 +1,2439 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml" >
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Fenêtre modale HTML5</title>	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+	<h1>Fenêtre modale HTML5</h1>
+	<p id="promptCompat">Votre navigateur ne pend pas en charge les balises <code>&lt;dialog></code></p>
+	<div class="buttons" style="margin-left:40%">
+	    
+	    <button onclick="SaisirData('1')">Alert simple</button><br><br>
+		<button onclick="SaisirData('2')">Alert gauche</button><br><br>
+		<button onclick="SaisirData('3')">Confirm bas</button><br><br>
+		<button onclick="SaisirData('4')">Prompt haut avec input de type select</button><br><br>
+		<button onclick="SaisirData('5')">Prompt droite avec input de type checkbox</button><br><br>
+		<button onclick="SaisirData('6')">Prompt centre avec input datetime</button><br><br>
+		<button onclick="SaisirData('7')">Prompt avec  image </button><br><br>
+		<button onclick="SaisirData('8')">Prompt avec radio button</button> <br><br>
+		<button onclick="SaisirData('9')">Prompt avec input password</button><br><br>
+		<button onclick="SaisirData('10')">Prompt avec input email</button><br><br>
+		<button onclick="SaisirData('11')">Prompt avec input text</button><br><br>
+		<button onclick="SaisirData('12')">Prompt avec input file</button><br><br>
+		<button onclick="SaisirData('13')">Prompt avec un input avec plusieurs input de type text issu d'un flux</button><br><br>
+		<button onclick="SaisirData('14')">Prompt avec input date</button><br><br>
+		<button onclick="SaisirData('15')">Prompt avec deux type date</button><br><br>
+		<button onclick="SaisirData('16')">Prompt avec deux type datetime</button><br><br>
+		<button onclick="SaisirData('17')">Prompt avec deux type time</button><br><br>
+		<button onclick="SaisirData('18')">Prompt avec un input time</button><br><br>
+		<button onclick="SaisirData('19')">Prompt avec un input datetime</button><br><br>
+	    
+	
+	</div>
+   	<!-- Script appel utilisateur-->
+	<script>
+	function SaisirData(param){
+	   /*PromptSaisieData
+	   
+	     param 1 : function d'initialisation de l'IHM
+		 
+		 param 2 : type de la fenêtre , trois types possibles : confirm, alert et prompt
+		 
+				 Test d'utilisation de la fonction
+				 
+				 PromptSaisieData("SaisirData_scan()",'confirm/confirm/alert','','','','','','','','');
+				 
+		 param 3 : position relatif du dialog sur la page à choisir entre gauche, droite, haut, bas et centre
+				 
+				 Test d'utilisation 
+				 
+				 PromptSaisieData("SaisirData_scan()",'confirm/confirm/alert','gauche/droite/haut/bas/gauche','','','','','','','');
+		 
+		 param 4 : coordonnée x equivalent à left en css uniquement des nombres entiers négatifs ou positifs avec les mesures obligatoires soit en px, em , % etc...
+		 
+				 Test d'utilisation de la fonction
+				 
+				 PromptSaisieData("SaisirData_scan()",'confirm/confirm/alert','gauche/droite/haut/bas/gauche','50px','','','','','','');
+		 
+		 param 5 : coordonnée y equivalent à left en css uniquement des nombres entiers négatifs ou positifs avec les mesures obligatoires soit  en px, em , % etc...
+		 
+				 Test d'utilisation de la fonction 
+				 
+				 PromptSaisieData("SaisirData_scan()",'confirm/confirm/alert','gauche/droite/haut/bas/gauche','50px','70px','','','','','');
+		 
+		 param 6 : type de champ html html_input_texte, html_select , html_input_checkbox , html_input_radio, html_input_fichier
+		 
+		 
+				  Test d'utilisation de la fonction 
+				  
+				  ------input_text------
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','50px','70px','text','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+				  
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','50px','70px','text:Nom,texte,20;Prenom,text,20;age,nombre,3','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+				  
+				  ------select------
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','50px','70px','select','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+				  
+				  ------input_checkbox-----  
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','50px','70px','checkbox','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+				  
+				  ------input_radio-------
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','50px','70px','radio','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+				  
+				  ------input_file-------
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','50px','70px','file','Jours feries','','Images/btn_valider1.jpg','');
+				  
+				  ------input_date-------
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','50px','70px','date','Jours feries','','Images/btn_valider1.jpg','');
+				  
+				  ------input_image-------
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','50px','70px','image:Images/btn_valider1.jpg','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+				  
+				  ------
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','50px','70px','','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+				  
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','50px','70px','','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+				  
+		  
+		 param 7 : titre de la fenêtre dialog
+		 
+		          Test d'utilisation de la fonction 
+						 
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','','','file','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+		 
+		 
+		 param 8 : contenu texte de la fenêtre
+		 
+		          Test d'utilisation de la fonction 
+						 
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','','','file','Jours feries','Saisir la date','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+				  
+		 param 9 : lien image de la fenêtre
+		 
+		          Test d'utilisation de la fonction 
+						 
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','','','file','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+		 
+		 param 10: flux du select
+		 
+		          Test d'utilisation de la fonction 
+						 
+				  PromptSaisieData("SaisirData_scan()",'prompt','gauche/droite/haut/bas/gauche','','','file','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption'); 
+	   */
+	   var lien_icone_fenêtre = 'data:image/png;base64,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';
+	   
+	   //PromptSaisieData('SaisirData_scan()','prompt','','','','texte:Nom,texte,20;Prenom,texte,20;age,nombre,3;nationalite,texte,20','Jours feries','Veuillez remplir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+	   
+	   //PromptSaisieData('SaisirData_scan()','prompt','','','','datetime','Jours feries','Veuillez remplir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+	   
+	   //PromptSaisieData('SaisirData_scan()','prompt','','','','heure_debut;heure_fin','Jours feries','Veuillez rempmlir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+	   
+	   //PromptSaisieData('SaisirData_scan()','prompt','','','','date_heure_debut;date_heure_fin','Jours feries','Veuillez rempmlir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+	   
+	   //PromptSaisieData('SaisirData_scan()','prompt','','','','date_debut,date de debut;date_fin,date de fin','Jours feries','Veuillez remplir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+	   
+	   //PromptSaisieData('SaisirData_scan()','prompt','','','','date_debut,date_fin~date de debut,date de fin','Jours feries','Veuillez remplir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+	    
+	   var dialog;
+	   
+	   dialog = document.getElementById('mydialog');
+	   
+	   dialog.style.display  = "block";
+	   
+	   if(param == '1') 
+	   {
+	   
+	      PromptSaisieData("SaisirData_scan()",'alert','','','','','','Validation réussie','',''); 
+		  return;
+		  
+	   }
+	   
+	   if(param == '2') 
+	   {
+	   
+	       PromptSaisieData("SaisirData_scan()",'alert','gauche','','','','','Validation réussie','','');
+		     return;
+	   }
+	   
+	   if(param == '3') 
+	   {
+	     
+		   PromptSaisieData("SaisirData_scan()",'confirm','bas','','','','','Voulez vous valider?','','');
+		   return;
+	   }
+	   
+	   if(param == '4') 
+	   {
+	   
+	       PromptSaisieData("SaisirData_scan()",'prompt','haut','','','select','Jours feries','Saisir les valeurs','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+		     return;
+		   
+	   }
+	   
+	   if(param == '5') 
+	   {
+	   
+	       PromptSaisieData("SaisirData_scan()",'prompt','droite','','','checkbox','Jours feries','Selectionner les valeurs','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+		   return;
+	   }
+	   
+	   if(param == '6') 
+	   {
+	   
+	      PromptSaisieData("SaisirData_scan()",'prompt','centre','','','datetime','Jours feries','Saisir les valeurs','Images/btn_valider1.jpg','');
+		  return;
+	   }
+	   
+	   if(param == '7') 
+	   {
+	   
+	     PromptSaisieData("SaisirData_scan()",'prompt','','50px','70px','image:Images/btn_valider1.jpg','Jours feries','Saisir les valeurs','','Penthecote;Noel;Nouvel an;Assomption');
+		 return;
+	   }
+	   
+	   if(param == '8') {
+	   
+	      PromptSaisieData("SaisirData_scan()",'prompt','','50px','70px','radio','Jours feries','Saisir les valeurs','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+	      return;
+	   }
+
+	   if(param == '9') {
+	   
+	     PromptSaisieData("SaisirData_scan()",'prompt','','50px','70px','password','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+		 return;
+	   }
+	   
+	   if(param == '10') {
+	   
+	     PromptSaisieData("SaisirData_scan()",'prompt','centre','','','email','Jours feries','Saisir les valeurs','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+	     return;
+	   }
+	   
+	   if(param == '11') {
+	   
+	     PromptSaisieData("SaisirData_scan()",'prompt','gauche','','','text','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+	     return;
+	   }
+	   
+	   if(param == '12') {
+	   
+	     PromptSaisieData("SaisirData_scan()",'prompt','bas','','','file','Jours feries','','Images/btn_valider1.jpg','Penthecote;Noel;Nouvel an;Assomption');
+	     return;
+	   }
+	   
+	   if(param == '13') {
+	   
+	     PromptSaisieData('SaisirData_scan()','prompt','','','','texte:Nom,texte,20;Prenom,texte,20;age,nombre,3;nationalite,texte,20','Jours feries','Veuillez remplir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+	     return;
+	   }
+	   
+	   if(param == '14') {
+	     
+		 PromptSaisieData('SaisirData_scan()','prompt','','','','date','Jours feries','Veuillez remplir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+		 return;
+	   }
+	   
+	   if(param == '15') {
+	   
+	     PromptSaisieData('SaisirData_scan()','prompt','','','','date_debut,date_fin~date de debut, date de fin','Jours feries','Veuillez rempmlir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+		 return;
+	   }
+	   
+	   if(param == '16') {
+	     
+		 PromptSaisieData('SaisirData_scan()','prompt','','','','date_heure_debut,date_heure_fin~date et heure de debut,date et heure de fin','Jours feries','Veuillez rempmlir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+	     return;
+	   }
+	   
+	   if(param == '17') {
+	   
+	     PromptSaisieData('SaisirData_scan()','prompt','','','','heure_debut,heure_fin~heure de debut,heure de fin','Jours feries','Veuillez remplir les champs de formulaire',lien_icone_fenêtre,'Penthecote;Noel;Nouvel an;Assomption');
+		 return;
+	   }
+	   
+	   if(param == '18') {
+	   
+	      PromptSaisieData("SaisirData_scan()",'prompt','centre','','','time','Jours feries','Saisir les valeurs','Images/btn_valider1.jpg','');
+	      return;
+	   }
+	   
+	   if(param == '19') {
+	   
+	      PromptSaisieData("SaisirData_scan()",'prompt','centre','','','datetime','Jours feries','Saisir les valeurs','Images/btn_valider1.jpg','');
+	      return;
+	   }
+	   
+	   else
+	   {
+	      alert('parametre invalide');
+		  dialog.style.display  = "none";
+		  return;
+
+	   }
+	     return; 
+	}
+	
+	 // Toutes les X secondes cette fonction d'ecoute(Handler) est appelé ( cela simule de la boucle While ) 
+	 
+	 function SaisirData_scan()
+	 {
+	  if (ScanAttenteSaisie() == true ) // Si saisie finalisée , on peut récupérer les données
+		 {
+		     var x = GetResultValue();
+		     alert( "Retour  : X-Value = " + x );
+	 	 }
+	 }
+	 
+	</script>
+<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->	
+<!--  Zone embarquée à insérer avant </body> -->	
+<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<style>
+        #mydialog {
+		   display:none;
+		   z-index:1;
+		}
+        dialog {
+		 position: absolute;
+		 z-index:1;
+		}
+		
+		#promptCompat {
+			display: none;
+		}
+		#promptCompat.no_dialog {
+			box-shadow: 0 0 5px 2px red;
+			padding: 10px;
+			display: block;
+			text-align: center;
+			font-weight: bold;
+		}
+		.boutons{
+			padding: 10px;
+		}
+		dialog{
+			background-color: #E1E4F2;
+			border-radius: 10px;
+			box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+		}
+		dialog::backdrop{
+			background-color: rgba(0, 0, 0, 0.6);
+		}
+		
+	img{
+		   width:50px;
+		   height:50px;
+		   margin-left:80%;
+		   align:top;
+		   margin-top:-50px;
+		   Font-Weight: Bold;
+		}
+	p{
+	  align : top;
+	  margin-top: 0px;
+	}
+	
+	#contenu_prompt, #contenu_alert, #contenu_confirm {
+	  display:none;
+	  min-width:300px; 
+      align:center;	  
+	}
+	 
+	 #prompt_btn_select , prompt_btn_text, #prompt_btn_email , #prompt_btn_password , #prompt_btn, #alert_btn, #confirm_btn, #prompt_btn_checkbox, #prompt_btn_date, prompt_btn_image {
+	  display:none;
+	  margin-left:40%;
+
+	}
+	 #prompt_btn{
+	  margin-top:10px;
+	} 
+	
+	#prompt_btn_text {
+	   margin-top:-38px;
+	   margin-left: 50%;
+	}
+	
+	#prompt_btn_select , prompt_btn_text , #prompt_btn_email , #prompt_btn_password , #prompt_btn_text , #prompt_valider_flux_date , #prompt_valider_flux_time, #prompt_valider_flux_datetime , #prompt_valider_flux_texte , #prompt_valider_flux_texte , #prompt_btn_date, #prompt_btn_time, #prompt_btn_datetime , #prompt_btn_image , #prompt_btn_text , #alert_btn , #confirm_btn , #prompt_btn_checkbox , #prompt_btn_radio , #prompt_btn_file , #prompt_btn_date , prompt_btn_image {
+	  margin-top:-38px;
+	  margin-left: 50%;
+	}
+	
+	#prompt_btn_text {
+	  //margin-top:-20px;
+	}
+	
+	#prompt_btn_fermer {
+	  margin-left:-120px;
+	}
+	
+	#prompt_input_text {
+	  display:none;
+	  margin-left:20%;
+	}
+	
+	#alert_btn_ok {
+	  margin-top:20%;
+	  margin-left:-10px;
+	
+	}
+	
+	#confirm_btn {
+	  margin-top:2%;
+	  margin-left:60px;
+	
+	}
+	
+	#input_checkbox_fieldset, #prompt_btn_file , #prompt_input_select , #prompt_input_datetime , #prompt_btn_email , #prompt_btn_password , #prompt_input_email , #prompt_input_password , #prompt_btn_text , #prompt_valider_flux_texte , #prompt_valider_flux_time , #prompt_valider_flux_date , #prompt_valider_flux_datetime , #prompt_input_time ,#prompt_input_datetime , #prompt_btn_date, #prompt_btn_time, #prompt_btn_datetime,  #prompt_btn_image,  #label_text_multiple,  #text_multiple , #prompt_input_file, #prompt_input_radio, #input_radio_fieldset, #input_checkbox_legend ,#prompt_input_file , #prompt_input_time ,  #prompt_input_date, #prompt_input_image, #div_input_date, #div_input_time, #div_input_datetime, #prompt_valider_flux_date, #prompt_valider_flux_time, #prompt_valider_flux_datetime {
+	  display:none;
+	}
+	
+	#prompt_input_select {
+	  display:none;
+	  margin-left:20%;
+	}
+	
+	#prompt_content, #alert_content, #confirm_content {
+	
+	  text-align: center;  
+		
+	}
+	
+	#prompt_btn_radio, #prompt_btn_file {
+	  display:none;
+	}
+	
+	#prompt_input_image {
+	
+	  margin-top: 10px;
+	  margin-left: 120px;
+	}
+	
+	#input_checkbox_div {
+	  padding: 0px 0px 0px 0px;
+	}
+	
+	dialog{
+	background-color : white;
+	
+	}
+	
+</style>	
+
+<!-- Implémentation de l'IHM de la fenêtre modale -->
+<dialog id="mydialog">
+	        
+		<!-- Logo -->
+		
+		<!--img id="img" src = 'data:image/png;base64,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' /-->
+        &nbsp;&nbsp;&nbsp;
+		
+		<!-- Logo/ -->
+		
+        <!-- titre -->
+		<div id="titre"></div>
+		<!-- titre/ -->
+		 
+		<!-- image --> 
+		<img id="img" src=""/> <hr>
+		<!-- image -->
+		
+		<!-- contenu -->
+        
+		<!-- contenu_prompt -->
+		<div id="contenu_prompt"> 
+		
+               <div id = "prompt_content">
+			   
+			   </div><br>
+			   
+			   <div id = "text_multiple">
+			        
+			   </div>
+			   
+		       <input class="form-control" style="width:200px" type="text" id= "prompt_input_text" placeholder = "Saisir les informations"/>
+
+			   <select id="prompt_input_select">
+			   
+			   </select>
+			   
+			   <input type = "file" id="prompt_input_file" multiple class="form-control">
+			   
+			   <input type = "date" id="prompt_input_date" class="form-control">
+			   
+			   <input type = "datetime-local" id="prompt_input_datetime" class="form-control">
+			   
+			   <input type = "time" id="prompt_input_time" class="form-control">
+			   
+			   <input type = "email" id="prompt_input_email" class="form-control">
+			   
+			   <input type = "password"  id ="prompt_input_password" class="form-control">
+			   
+			   <div id = "div_input_date" >
+			      
+			   </div>
+			   
+			   <div id = "div_input_time" >
+			      
+			   </div>
+			   
+			   <div id= "div_input_datetime" >
+			    
+			   </div>
+			   
+			   <img src="Images/btn_valider1.jpg" id="prompt_input_image"/>
+			   
+			   <fieldset id="input_checkbox_fieldset">
+			   
+                    <legend id="input_checkbox_legend"></legend>
+			   
+                    <div id="input_checkbox_div">
+					   
+                    </div>
+					   
+            </fieldset>
+			
+			<fieldset id="input_radio_fieldset">
+			
+				<legend id="input_radio_legend"></legend>
+				
+				<div id="input_radio_div">
+				
+
+				</div>
+		
+            </fieldset>
+				 
+		</div>
+		<!-- contenu_prompt/ -->
+		
+		<!-- contenu_alert -->
+		<div  id="contenu_alert"> 
+               
+               <div id="alert_content"></div>
+				 
+		</div>
+		<!-- contenu_alert/ -->
+		
+		<!-- contenu_confirm -->
+		<div id="contenu_confirm"> 
+              
+               <div id="confirm_content"></div>
+				 
+		</div>
+		<!-- contenu_confirm -->
+		<!-- contenu/ -->
+		<!-- prompt -->
+		<hr>
+		<div  id="prompt_btn" class="boutons"> 
+
+		    <button class="btn btn-outline-danger" id="prompt_btn_fermer" onclick="$dialog.returnValue = '#CANCEL';$dialog.close();"></button>
+			
+		    <button class="btn btn-outline-success" id="prompt_btn_select" onclick="$dialog.returnValue = document.getElementById('prompt_input_select').value;$dialog.close();"></button>
+			
+			<button class="btn btn-outline-success" id="prompt_btn_text" onclick="$dialog.returnValue = document.getElementById('prompt_input_text').value;$dialog.close();"></button>
+			
+			<button class="btn btn-outline-success" id="prompt_btn_checkbox" onclick="$dialog.returnValue = checkbox_all();$dialog.close();"></button>
+			
+			<button class="btn btn-outline-success" id="prompt_btn_radio" onclick="$dialog.returnValue = radio_check();$dialog.close();"></button>
+			
+			<button class="btn btn-outline-success" id="prompt_btn_file" onclick="$dialog.returnValue = document.getElementById('prompt_input_file').value;$dialog.close();"></button>
+			
+			<button class="btn btn-outline-success" id="prompt_btn_date"></button>
+			
+			<button class="btn btn-outline-success" id="prompt_btn_time"></button>
+			
+			<button class="btn btn-outline-success" id="prompt_btn_datetime"></button>
+			
+			<button class="btn btn-outline-success" id="prompt_btn_image" onclick="$dialog.returnValue = document.getElementById('prompt_input_image').src;$dialog.close();"></button>
+			
+		    <button class="btn btn-outline-success" id="prompt_btn_email"></button>
+            
+			<button class="btn btn-outline-success" id="prompt_btn_password" onclick="$dialog.returnValue = document.getElementById('prompt_input_password').value;$dialog.close();" ></button>
+
+		    <button class="btn btn-outline-success" id="prompt_valider_flux_texte"></button>
+		   
+		    <button class="btn btn-outline-success" id="prompt_valider_flux_date" ></button>
+		   
+		    <button class="btn btn-outline-success" id="prompt_valider_flux_time" ></button>
+		   
+		    <button  class="btn btn-outline-success" id="prompt_valider_flux_datetime"></button>
+		   	
+		</div>
+		<!-- prompt/ -->
+		
+		<!-- alert -->
+		<div id="alert_btn" class="boutons">
+			
+		    <button class="btn btn-outline-primary" id="alert_btn_ok" onclick="$dialog.returnValue = 'OK';$dialog.close();"></button>
+		
+		</div>
+		<!-- alert/-->
+		
+		<!-- confirm-->
+		<div id="confirm_btn" class="boutons">
+		
+		    <button id="confirm_btn_annuler" class="btn btn-outline-danger"   onclick="$dialog.returnValue = '#CANCEL';$dialog.close();"></button>
+		
+		    <button id="confirm_btn_valider" class="btn btn-outline-success"   onclick="$dialog.returnValue = 'OK';$dialog.close();"></button>
+		
+		</div>
+		<!-- confirm/-->
+</dialog>
+<!-- Implémentation de l'IHM  -->
+	
+<script>
+	var $dialog;
+	var return_value;
+	var Isopen;
+	var Id_setInterval;
+	var Id_setInterval_scan;
+	
+	//Variables modifiables liés au contexte de l'interface
+	
+	var text_prompt_btn_fermer = "Fermer";
+	var text_prompt_btn_select_valider = "Valider";
+	var text_prompt_btn_input_text_valider = "Valider";
+	var text_prompt_btn_checkbox_valider = "Valider";
+	var text_alert_btn_ok = "OK";
+	var text_confirm_btn_annuler = "Annuler";
+	var text_confirm_btn_valider = "Valider";
+	var prompt_valider_flux_text = "Valider";
+	
+	//Variables de l'interface
+	var global_type_dialog; 
+	var global_type_input;
+	var global_title; 
+	var blobal_image; 
+	var global_flux_select;
+	var global_separateur = ";";
+	
+	function GetResultValue()
+	{
+	
+	 return return_value;
+	 
+	}
+	// fonction pour l'IHM demandante
+	function ScanAttenteSaisie()
+	{
+		var flag_even = MyDoEvents();  // revoit true ou false
+		                               // true  - saisie terminée
+							           // false - saisie encours 
+        // Si saisie terminée
+		if ( flag_even == true )
+		{
+		 clearInterval(Id_setInterval_scan); // Stopper le Handler IHM d'interception
+		}
+       
+		return flag_even;							  
+	}
+	
+	  document.querySelector("#prompt_btn_date").addEventListener("click",function () {
+	  
+	    var date1 = "", date2 = "", date_jour = "";
+		
+		var date3 = "", date4 = "";
+	  
+	    var date_input = document.getElementById('prompt_input_date').value;
+		
+		date_jour = (new Date().getFullYear() + '-' + '0'+(new Date().getMonth()+1) +'-'+ (new Date().getDate()) ); 
+		
+		if (date_input == "" || date_input == null) 
+		{
+		   alert ("Vous devez renseigner obligatoirement une date");
+		}
+		
+		date1 = date_jour.split('-');
+		
+		for (var i=0; i < date1.length; i++) 
+		{
+		  date2 += date1[i];
+		}
+        date3 = date_input.split('-');
+		
+		for (var i=0 ; i < date3.length ; i++) 
+		{
+		  date4 += date3[i];
+		}
+		
+		if(  parseInt(date4) < parseInt (date2) ) 
+	    {
+			alert("Veuillez refaire le choix de la date");
+			return_value = "-1";
+			return return_value;
+	    }
+	   
+	   else 
+	   {
+	    $dialog.returnValue = date_input;
+		$dialog.close();
+	    return date_input;
+	  }
+		
+	  
+	  });
+	  
+	     document.querySelector("#prompt_btn_datetime").addEventListener("click",function () {
+	  
+	     var date1 = "", date2 = "", date_jour = "";
+		
+		 var date3 = "", date4 = "" , date5 = "" , date6 = "";
+		 
+		 var date7 = "", date8 = "" , date9 = "" , date10 = "", date11 = "", date12 = "";
+	  
+	     var date_input = document.getElementById('prompt_input_datetime').value;
+		
+		 date_jour = (new Date().getFullYear() + '-' + '0'+(new Date().getMonth()+1) +'-'+ (new Date().getDate())+'T'+ (new Date().getHours()) +""+ (new Date().getMinutes()) );
+		
+		 date1 = date_jour.split("-");
+		 
+	     for (var i=0; i < date1.length ; i++) 
+	     { 
+	      date2 += date1[i];
+	     }
+
+	    date3 = date2.split(":");
+	    for (var i=0; i < date3.length ; i++) 
+	    {   
+	    date4 += date3[i];
+	    }
+
+	     date5 = date4.split("T");
+	    for (var i=0 ; i < date5.length ; i++) 
+	    {
+	    date6 += date5[i];
+	    }
+		
+		date7 = date_input.split("-");
+		 
+	     for (var i=0; i < date7.length ; i++) 
+	     { 
+	      date8 += date7[i];
+	     }
+
+	    date9 = date8.split(":");
+	    for (var i=0; i < date9.length ; i++) 
+	    {   
+	    date10 += date9[i];
+	    }
+
+	    date11 = date10.split("T");
+	    for (var i=0 ; i < date11.length ; i++) 
+	    {
+	    date12 += date11[i];
+	    }
+		
+		if (date_input == "" || date_input == null) 
+		{
+		   alert ("Vous devez renseigner obligatoirement une date");
+		   return_value = "-1";
+		   return return_value;
+		}
+
+		if(  parseInt (date12) < parseInt (date6) ) 
+	    {
+		    alert("Veuillez refaire le choix de la date");
+			return_value = "-1";
+			return return_value;
+	    }
+	   
+	   else 
+	   {
+			$dialog.returnValue = date_input;
+			$dialog.close();
+			return date_input;
+	    }
+	  
+	  });
+	  
+	  document.querySelector("#prompt_btn_time").addEventListener("click",function () {
+	  
+	   var date1 = "", date2 = "", date_jour = "";
+		
+		var date3 = "", date4 = "";
+	  
+	    var date_input = document.getElementById('prompt_input_time').value;
+		
+		date_jour = new Date().getHours() +""+new Date().getMinutes(); 
+		
+		if (date_input == "" || date_input == null) 
+		{
+		   alert ("Vous devez renseigner obligatoirement une date");
+		   return_value = "-1";
+		return return_value;
+		}
+		
+		date1 = date_input.split(':');
+		
+		for (var i=0; i < date1.length; i++) 
+		{
+		  date2 += date1[i];
+		}
+		
+		if(  parseInt(date2) < parseInt (date_jour) ) 
+	    {
+			alert("Veuillez refaire le choix de la date");
+			return_value = "-1";
+			return return_value;
+	    }
+	   
+	   else 
+	   {
+	    $dialog.returnValue = date_input;
+		return_value = date_input;
+		$dialog.close();
+	    return return_value;
+	  }
+
+	  
+	  });
+	 
+	  document.querySelector("#prompt_valider_flux_date").addEventListener("click", function() {
+	     
+      var date_debut = ""; 
+	  var date_fin = "";
+	  var concat = "";
+	  var date_jour = "";
+	  var date1 = "", date2 = "";
+	  
+	  date_debut = document.getElementById('date_debut').value;
+	  date_fin = document.getElementById('date_fin').value;
+	  concat = date_debut + global_separateur + date_fin;
+	  date_jour = ( new Date().getFullYear() + '-' + '0'+(new Date().getMonth()+1) +'-'+ (new Date().getDate()) ); 
+	  
+	  date1 = date_jour.split("-");
+	  for (var i=0; i<date1.length ; i++)
+	  { 
+	    date2+= date1[i];
+	  }
+
+	  if ( date_debut == "" || date_debut == null) 
+	  {
+	    alert("Veuillez sélectionner une date de début");
+		return_value = "-1";
+		return return_value;
+	  }
+	  
+	  if ( date_fin == "" || date_fin == null) 
+	  {
+	    alert("Veuillez sélectionner une date de fin");
+		return_value = "-1";
+		return return_value;
+	  }
+	  
+	  if (  new Date(date_debut).getTime() > new Date(date_fin).getTime()   )  
+	  {
+	    alert("Veuillez refaire les choix date de debut et date de fin");
+		return_value = "-1";
+		return return_value;
+		
+	  }
+	  
+	  if(  new Date(date_debut).getTime() < parseInt (date2) ) 
+	  {
+	    alert("Veuillez refaire les choix date de debut et date de fin");
+		return_value = "-1";
+		return return_value;
+	  }
+	  
+	  if( new Date(date_fin).getTime() < parseInt (date2) )
+	  {
+	    alert("Veuillez refaire les choix date de debut et date de fin");
+		return_value = "-1";
+		return return_value;
+	  }
+	  
+	  else {
+	    $dialog.returnValue = concat;
+		$dialog.close();
+	    return concat;
+	  }
+ 
+     });
+	
+      document.querySelector("#prompt_valider_flux_time").addEventListener("click", function() {
+	  
+	  var date_debut = "";
+	  var date_fin = "";
+	  var date_actuel = "";
+	  var concat = "";
+	  var date1 = "";
+	  var date2 = "";
+	  var result1 = "";
+	  var result2 = "";
+	  
+	  date_debut = document.getElementById('heure de debut').value;
+	  date_fin = document.getElementById('heure de fin').value;  
+	  concat = date_debut + global_separateur + date_fin;
+	  date1 = date_debut.split(":");
+	  date2 = date_fin.split(":");
+	  date_actuel = new Date().getHours() +""+new Date().getMinutes();
+	  
+	  for(var i = 0; i < date1.length; i++){
+	  
+		 result1+= date1[i];
+	  }
+
+	  date2 = date_fin.split(":");
+	  
+	  for(var i = 0; i < date2.length; i++){
+	  
+		 result2+= date2[i];
+	  }
+
+	  if ( date_debut == "" || date_debut == null) 
+	  {
+	    alert("Veuillez sélectionner une heure de début");
+
+	  }
+	  
+	  if ( date_debut == "" || date_debut == null) 
+	  {
+	    alert("Veuillez sélectionner une heure de fin");
+
+	  }
+	  
+	  if (  parseInt (result1) > parseInt (result2) )  
+	  {
+	    alert("Veuillez refaire les choix des heures de début et de fin");		
+		return_value = "-1";				
+		return return_value;
+		
+	  }
+	  
+	  if  (  parseInt (result1) < parseInt (date_actuel) ) 
+	  
+	  {
+	    alert("Veuillez refaire les choix des heures de début et de fin");		
+		return_value = "-1";				
+		return return_value;
+	  }
+	  
+	  if  (  parseInt (result2) < parseInt (date_actuel) ) 
+	  
+	  {
+	    alert("Veuillez refaire les choix des heures de début et de fin");		
+		return_value = "-1";				
+		return return_value;
+	  }
+	  
+	  else 
+	  {
+	   $dialog.returnValue = concat;
+	   $dialog.close();
+	   return concat;
+	  }
+	
+	});
+	
+	  document.querySelector("#prompt_valider_flux_datetime").addEventListener("click", function() {   
+	  var date_debut = "";	  
+	  var date_fin = "";
+      var date_jour = "";	  
+	  var concat = "";
+	  var date1 = "", date2 = "", date3 = "", date4 = "", date6 = "";
+	  
+	  date_jour = (new Date().getFullYear() + '-' + '0'+(new Date().getMonth()+1) +'-'+ (new Date().getDate())+'T'+ new Date().toLocaleTimeString() );
+	  date_debut = document.getElementById('date_heure_debut').value;
+	  date1 = date_jour.split("-");
+	  for (var i=0; i < date1.length ; i++) 
+	  { 
+	     date2 += date1[i];
+	  }
+
+	  date3 = date2.split(":");
+	  for (var i=0; i < date3.length ; i++) 
+	  {   
+	    date4 += date3[i];
+	  }
+
+	  date5 = date4.split("T");
+	  for (var i=0 ; i < date5.length ; i++) 
+	  {
+	    date6 += date5[i];
+	  }
+
+	  date_fin = document.getElementById('date_heure_fin').value;	  
+	  concat = date_debut + global_separateur + date_fin;
+	  
+	  if ( date_debut == "" || date_debut == null) 
+	  {
+	    alert("Veuillez sélectionner une date de début valide");
+		return_value = "-1";		
+		$dialog.style.display  = "block";		
+		return return_value;
+	  }
+	  
+	  if ( date_fin == "" || date_fin == null) 
+	  {
+	    alert("Veuillez sélectionner une date de fin valide");
+		return_value = "-1";		
+		$dialog.style.display  = "block";		
+		return return_value;
+
+	  }
+	  
+	  if (  new Date(date_debut).getTime() > new Date(date_fin).getTime()   )  
+	  {
+	    alert("Veuillez séléctioner une date de debut et de fin valides");		
+		return_value = "-1";				
+		return return_value;
+		
+	  }   
+	  alert ( ((new Date(date_debut).getTime())*10)  );
+	  
+	  alert ( (parseInt (date6))  );
+	  
+	  if ( parseInt((new Date(date_debut).getTime())*10) <  parseInt (date6)  )   
+	  {
+	    alert("Veuillez séléctioner une date de debut valide");
+        return_value = "-1";				
+		return return_value;		
+	  } 
+	  
+	  if ( parseInt((new Date(date_fin).getTime())*10) < parseInt (date6)  )  
+	  {
+	    alert("Veuillez séléctioner une date de fin valide");
+        return_value = "-1";				
+		return return_value;		
+	  }
+		
+	  else
+	  
+	  {  
+	    concat = date_debut + global_separateur + date_fin;
+		$dialog.returnValue = concat;
+	    $dialog.close();
+	    return concat;
+	  }
+   
+	});	
+	// Fonction pour renvoyer la valeur du radio button qui a été choisi
+	function radio_check()
+	{ 
+	  var retour;	  
+	  var concat = "";	  
+	  var value = "";	  
+	  var _radio = document.querySelectorAll('input[type=radio]');	  
+	  var compteur = 0;	  
+	  var  nombre_cellule_coche;	  
+	  var _radio_coche = document.querySelector('input[type=radio]:checked');
+	  
+	  nombre_cellule_coche = _radio_coche.length;
+	  
+	  for (var i=0; i < _radio.length; i++)
+	  {
+			 
+			 if(_radio[i].checked) 
+			 {
+			 
+                value = _radio[i].value;							  
+				concat+= value;
+							   			
+			}
+
+	}
+
+	  return concat;
+	  
+	}	
+	// Fonction pour renvoyer les valeurs du cases à coser html qui ont été cochés
+	
+	function checkbox_all(){
+	  
+	  input_checkbox_div = document.getElementById('input_checkbox_div');
+	  
+	  var retour;	  
+	  var concat = "";	     
+	  var value = "";	  
+	  var _cases = document.querySelectorAll('input[type=checkbox]');	  
+	  var compteur = 0;	  
+	  var  nombre_cellule_coche;	  
+	  var _cases_coches = document.querySelectorAll('input[name=checkbox]:checked');
+	  
+	  nombre_cellule_coche = _cases_coches.length;
+	  
+	  for (var i=0; i < _cases.length; i++)
+	  {
+
+			 if(_cases[i].checked) 
+			 
+			{
+			 
+							compteur += 1;							
+							value = _cases[i].value;
+							
+							
+							if (compteur <  nombre_cellule_coche) 
+							{
+							   concat+= value + global_separateur;
+							   
+							}
+							
+							if (compteur ==  nombre_cellule_coche)
+							{							
+							  concat+= value;
+							
+							}
+							
+							if(compteur >  nombre_cellule_coche) 
+							{
+							
+							  concat+= value ;
+							  
+							}
+							
+			}
+			 
+    }
+
+	  return concat;
+	}
+	    document.querySelector("#prompt_valider_flux_texte").addEventListener("click", function() 
+		{ 
+	    
+		var enfants = "";
+		var compteur = "";
+        var input_hidden = "";
+		var input_flux_multiple_div = "";
+		var test = "";
+		var concat = "";
+		var input_nombre;
+		var input_alphanumerics;
+		var code, length;
+		
+		input_flux_multiple_div = document.getElementById('contenu_prompt');
+        input_hidden = input_flux_multiple_div.querySelectorAll('input[type = "text"]:not([hidden = "hidden"])');
+		input_nombre = input_flux_multiple_div.querySelector('input[type = "text"], input[name = "nombre"]');
+		input_alphanumerics;
+
+        for (var i=0; i<input_hidden.length; i++) 
+		{    
+
+			if (  input_hidden[i].value == "" || input_hidden[i].value == null ) 
+			   
+			{
+                  alert("Vous devez saisir des valeurs dans tous les champs");	  
+				  return_value = "-1";	  
+			      return return_value;
+			}
+   
+			if (  input_hidden[i].value != "" || input_hidden[i].value != null   ) 
+			{
+				enfants = input_flux_multiple_div.querySelectorAll('input[type="text"]:not([hidden="hidden"])');					  
+				compteur=0;
+								  
+				for(var i=0; i<enfants.length; i++)
+				{		  
+					compteur+=1;
+					
+					if (input_hidden[i].name == "nombre" )
+                    {					
+						if ( isNaN ( parseInt ( input_hidden[i].value  ) )  )
+                        {						
+							alert("Vous devez saisir un nombre dans le champ  : "+input_hidden[i].getAttribute('id')+" ");		
+							return_value = "-1";
+					        return return_value;
+						}
+						
+					}
+
+                      if ( input_hidden[i].name == "texte"  )
+					{ 
+                        for (var j = 0, length = input_hidden[i].value.length; j < length; j++) 
+						
+						{
+                                code = input_hidden[i].value.charCodeAt(j);
+								
+                                if (!(code > 47 && code < 58) &&  !(code > 64 && code < 91) && !(code > 96 && code < 123)) 
+							    { 
+									alert("Vous devez saisir des caractères alphanumériques dans le champ  :  "+input_hidden[i].getAttribute('id'));
+										  
+                                    return_value = "-1";
+					
+					                return return_value;
+                                }			
+                        }
+				    }
+                    
+					if (input_hidden[i].name == "texte" )
+                    {											
+							if (compteur < enfants.length) 
+							{	
+								concat+= enfants[i].value + global_separateur;	
+							}
+									 
+							if (compteur >= enfants.length) 
+							{		   
+								concat+= enfants[i].value;								
+							}
+						
+					}
+                    
+					if (input_hidden[i].name == "nombre" )
+                    {					
+						if ( !isNaN ( parseInt ( input_hidden[i].value  ) )  )
+                        {						
+						
+							if (compteur < enfants.length) 
+							{	
+								concat+= enfants[i].value + global_separateur;	
+							}
+									 
+							if (compteur >= enfants.length) 
+							{		   
+								concat+= enfants[i].value;								
+							}
+						}
+						
+					}
+
+				}					  
+				return_value = concat;
+				$dialog.returnValue = return_value;
+	            $dialog.close();
+				return return_value;	
+		    }
+	 
+        }			 
+          
+	});
+	
+	document.getElementById("prompt_input_email").addEventListener("click", function() 
+	{ 
+	    
+		var email = "";
+		var valide;
+		valide = false;
+		email = document.getElementById('prompt_input_email').value;
+		
+	    for(var j=1;j<(email.length);j++ ) 
+		{
+		 if(email.charAt(j)=='@') 
+		 {
+			if(j<(email.length-4)) 
+			{
+				for(var k=j;k<(email.length-2);k++ ) 
+				{
+					if(email.charAt(k)=='.')
+					{
+						valide=true;
+					}
+					
+				}
+			}
+		 }
+	    }
+	
+		if (valide==false) 
+		{
+		 alert('Veuillez saisir une adresse email valide');
+		 return_value = "-1";			
+		 return return_value;
+		}
+		else 
+		{  
+		return_value = email;
+		$dialog.returnValue = return_value;
+		$dialog.close();
+		return return_value;
+		}
+	
+	});	
+
+	// Fonction qui traite les différentes informations recçus en paramètre puis ensuite traités et renvoyées qous forme de flux
+	function PromptSaisieData(handler_scan,type_dialog,position,x,y,type_input,title,text_content,image,flux_select)
+	{
+	 	// Partie embarquée
+		
+		// Initialisation
+		return_value  = "-1";	
+		
+		Isopen = "non";
+		// Fonction propre à l'IHM		
+	    global_title = title;		
+	    global_image = image;
+		
+		var tableau_image = "";		
+		var lien_image = "";		
+		var flux_texte_variable = "";		
+		var flux_texte_first = "";		
+		var flux_texte_second = "";		
+		var flux_texte_third = "";		
+		var flux_texte_four = "";		
+		var flux_texte_five =  "";		
+		var tableau_flux = "";		
+		var flux_texte_six = "";		
+		var tampon = "";		
+		var text_multiple;		
+	    var titre;		
+		var img;		
+		var div_prompt = "";		
+		var div_alert = "";		
+		var div_confirm = "";		
+		var prompt_btn = "";		
+		var alert_btn = "";		
+		var confirm_btn = "";		
+		var input_text = "";		
+		var input_select = "";		
+	    var input_date = "";	
+		var input_time = "";		
+		var input_datetime = "";	
+        var input_email = "";
+		var input_password = "";		
+		var options;		
+		var opt;		
+		var input_checkbox;		
+		var btn_select;		
+		var btn_text;		
+		var btn_time;		
+		var btn_datetime;		
+		var btn_email = "";
+		var btn_password = "";
+		var prompt_content;		
+		var alert_content;		
+		var confirm_content;		
+		var local_text_prompt_btn_fermer = "";		
+		var local_text_prompt_btn_select_valider = "";		
+		var local_text_prompt_btn_input_text_valider = "";		
+		var local_text_alert_btn_ok = "";		
+		var local_text_confirm_btn_annuler = "";		
+		var local_text_confirm_btn_valider = "";		
+		var input_checkbox_fieldset = "";		
+		var input_checkbox_div = "";		
+		var input_flux_multiple_div = "";		
+		var input_checkbox_legend = "";		
+		var input_radio_div = "";		
+		var input_radio_fieldset = "";     
+        var input_checkbox = "";		
+		var input_text = "";
+		var input_text_hidden;
+        var label_input = "";
+		var flux_bloc_1 = "";
+		var flux_bloc_2 = "";
+		var flux_bloc_3 = "";
+		var flux_traitement_1 = "";
+		var flux_traitement_2 = "";
+		var flux_traitement_3 = "";
+		var flux_text_bloc_1 = "";
+		var flux_text_bloc_2 = "";
+		var flux_text_bloc_3 = "";
+		var a_ajouter;
+		var div;
+		var text;
+		var concat_dates;
+		var tableau_date;
+		var date_time_first;
+		var date_time_second;
+		var dates;
+		var label_dates;
+		var div_input_date;
+		var div_input_time;
+		var div_input_datetime;
+		var date_time_input;
+		var date_time_label;
+		var prompt_valider_flux_date = "";
+		var prompt_valider_flux_time = "";
+		var prompt_valider_flux_datetime = "";
+		var br = "";
+
+		div = document.createElement("div");
+		div_input_date = document.getElementById('div_input_date');
+		div_input_time = document.getElementById('div_input_time');
+		div_input_datetime = document.getElementById('div_input_datetime');
+	    text_multiple = document.getElementById('text_multiple');
+		label_text_multiple = "";	
+		div_prompt = document.getElementById('contenu_prompt');
+		div_alert = document.getElementById('contenu_alert');
+		div_confirm = document.getElementById('contenu_confirm');;		 
+		titre = document.getElementById('titre');
+		img = document.getElementById('img');
+		prompt_btn = document.getElementById('prompt_btn');
+		alert_btn = document.getElementById('alert_btn');
+		confirm_btn = document.getElementById('confirm_btn')
+		btn_text = document.getElementById('prompt_btn_text');
+		btn_select = document.getElementById('prompt_btn_select');
+		btn_checkbox = document.getElementById('prompt_btn_checkbox');
+		btn_radio = document.getElementById('prompt_btn_radio');
+		btn_file = document.getElementById('prompt_btn_file');
+		btn_date = document.getElementById('prompt_btn_date');
+		btn_image = document.getElementById('prompt_btn_image');
+		btn_time = document.getElementById('prompt_btn_time');
+		btn_datetime = document.getElementById('prompt_btn_datetime');
+		btn_email = document.getElementById('prompt_btn_email');
+		btn_password = document.getElementById('prompt_btn_password');
+		prompt_valider_flux_texte = document.getElementById('prompt_valider_flux_texte');
+		prompt_valider_flux_date = document.getElementById('prompt_valider_flux_date');
+		prompt_valider_flux_time = document.getElementById('prompt_valider_flux_time');
+		prompt_valider_flux_datetime = document.getElementById('prompt_valider_flux_datetime');
+		titre.innerHTML = global_title;
+		
+		if( (global_image!="") && (global_image!=null) )
+		{
+		     img.src = global_image;
+		}
+		else 
+		{
+		    img.style.display = "none";
+		}
+		
+		input_text = document.getElementById('prompt_input_text');
+		input_select = document.getElementById('prompt_input_select');
+		input_file = document.getElementById('prompt_input_file');
+		input_date = document.getElementById('prompt_input_date');
+		input_time = document.getElementById('prompt_input_time');
+		input_datetime = document.getElementById('prompt_input_datetime');
+		input_image = document.getElementById('prompt_input_image');
+		input_email = document.getElementById('prompt_input_email');
+		input_password = document.getElementById('prompt_input_password');
+		prompt_content = document.getElementById('prompt_content');
+		alert_content = document.getElementById('alert_content');
+		confirm_content = document.getElementById('confirm_content');
+		input_checkbox_fieldset = document.getElementById('input_checkbox_fieldset');
+		input_checkbox_legend = document.getElementById('input_checkbox_legend');
+		input_checkbox_div = document.getElementById('input_checkbox_div');
+		input_radio_fieldset = document.getElementById('input_radio_fieldset');
+		input_valider_flux_max = "";
+		input_radio_legend = document.getElementById('input_radio_legend');
+		input_radio_div = document.getElementById('input_radio_div');
+		input_file_div = document.getElementById('input_file_div');
+		global_text_content = text_content;
+        
+		if (type_input.indexOf(":") != -1) 
+		{
+		
+             tableau_image = type_input.split(":");
+
+		     for(var i=0; i<tableau_image.length; i++)
+			 {
+		
+		     lien_image = tableau_image[1];
+		     global_type_input = tableau_image[0];
+
+		     }
+			 
+		     lien_image = tableau_image[1];
+		     global_type_input = tableau_image[0];
+			  
+		} 
+		
+		if (   (type_input.indexOf("~") != -1) &&  (type_input.indexOf(",") != -1)  ) 
+		{
+		     div_confirm.style.display = "none";
+		     confirm_btn.style.display = "none";
+		     div_alert.style.display = "none";
+		     tableau_date = type_input.split("~");
+			 
+			for (var i=0; i<tableau_date.length; i++) 
+			{
+			  date_time_first = tableau_date[0].split(",");
+			  date_time_second = tableau_date[1].split(",");
+			}
+ 
+			for ( var k=0; k<date_time_first.length; k++) 
+			{   
+			        
+					if ( (date_time_first[0] == "date_debut") && (date_time_first[1] == "date_fin") )
+					{   
+
+                        div_prompt.removeChild(div_prompt.childNodes[0]); 
+					    prompt_btn.style.display = "none";
+		                btn_text.style.display = "none";
+			            btn_checkbox.style.display = "none";
+			            btn_radio.style.display = "none";
+			            btn_file.style.display = "none";
+			            btn_date.style.display = "none";
+			            btn_image.style.display = "none";
+			            btn_time.style.display = "none";
+			            btn_datetime.style.display = "none";
+			            btn_email.style.display = "none";
+			            btn_password.style.display = "none";
+			            prompt_valider_flux_texte.style.display = "none";
+			            prompt_valider_flux_date.style.display = "none";
+			            prompt_valider_flux_time.style.display = "none";
+			            prompt_valider_flux_datetime.style.display = "none";
+					  
+					   alert_btn.style.display = "none";
+					   //input_file.style.display = "none";
+					   input_datetime.style.display = "none";
+					   input_select.style.display = "none";
+					   input_text.style.display = "none";
+					   input_file.style.display = "none";
+					   input_checkbox_div.style.display = "none";
+					   input_radio_div.style.display = "none";
+					   input_datetime.style.display = "none";
+					   input_date.style.display = "none";
+					   input_time.style.display = "none";
+					   prompt_content = document.getElementById('prompt_content');
+					   //prompt_content.style.display = "block";
+			           //prompt_content.innerHTML = global_text_content;
+			           div_prompt.style.display = "block";
+					   label_dates = document.createElement("label");
+					   label_dates.setAttribute("name", date_time_first[k]);
+					   label_dates.setAttribute("required", "required");
+					   label_dates.innerHTML = date_time_second[k];
+					   dates = document.createElement("input");
+					   dates.style.marginRight = "25px";
+					   dates.setAttribute("type", "date");
+					   dates.setAttribute("class","form-control");
+					   dates.setAttribute("id", date_time_first[k]);
+					   dates.setAttribute("name", date_time_first[k]);
+					   dates.setAttribute("required", "required");
+					   label_dates.style.marginRight = "25px"; 
+					   prompt_btn.style.display = "block";
+					   prompt_valider_flux_date.style.display = "block";
+					   prompt_valider_flux_date.innerHTML = prompt_valider_flux_text;
+			           local_text_prompt_btn_fermer = document.getElementById('prompt_btn_fermer');
+			           local_text_prompt_btn_fermer.innerHTML = text_prompt_btn_fermer;
+					   
+					   var les_dates = document.querySelectorAll('input[type="date"]');
+
+					   if ( (les_dates.length == 1) || (les_dates.length == 2) )
+					   {
+					       div_prompt.appendChild(label_dates);
+			               div_prompt.appendChild(dates);
+					   }
+
+					}
+					
+					if ( (date_time_first[0] == "date_heure_debut") && (date_time_first[1] == "date_heure_fin" ) )
+					{   
+					    if(div_prompt.children != null)
+						{
+					     div_prompt.removeChild(div_prompt.childNodes[0]); 
+						}
+					   
+					    prompt_btn.style.display = "none";
+		                btn_text.style.display = "none";
+			            btn_checkbox.style.display = "none";
+			            btn_radio.style.display = "none";
+			            btn_file.style.display = "none";
+			            btn_date.style.display = "none";
+			            btn_image.style.display = "none";
+			            btn_time.style.display = "none";
+			            btn_datetime.style.display = "none";
+			            btn_email.style.display = "none";
+			            btn_password.style.display = "none";
+			            prompt_valider_flux_texte.style.display = "none";
+			            prompt_valider_flux_date.style.display = "none";
+			            prompt_valider_flux_time.style.display = "none";
+			            prompt_valider_flux_datetime.style.display = "none";
+					
+					   alert_btn.style.display = "none";
+					   input_file.style.display = "none";
+					   input_datetime.style.display = "none";
+					   input_select.style.display = "none";
+					   input_text.style.display = "none";
+					   input_file.style.display = "none";
+					   input_checkbox_div.style.display = "none";
+					   input_radio_div.style.display = "none";
+					   input_datetime.style.display = "none";
+					   input_date.style.display = "none";
+					   input_time.style.display = "none";
+					
+					   prompt_content.style.display = "block";
+			           prompt_content.innerHTML = global_text_content;
+			           div_prompt.style.display = "block";
+					   label_dates = document.createElement("label");
+					   label_dates.setAttribute("name", date_time_second[k]);
+					   label_dates.setAttribute("required", "required");
+					   label_dates.innerHTML = date_time_second[k];
+					   dates = document.createElement("input");
+					   dates.style.marginRight = "25px";
+					   label_dates.style.marginRight = "25px";
+					   dates.setAttribute("type", "datetime-local");
+					   dates.setAttribute("class","form-control");
+					   dates.setAttribute("id", date_time_first[k]);
+					   dates.setAttribute("required", "required");
+					   prompt_btn.style.display = "block";
+					   prompt_valider_flux_datetime.style.display = "block";
+					   prompt_valider_flux_datetime.innerHTML = prompt_valider_flux_text;
+			           local_text_prompt_btn_fermer = document.getElementById('prompt_btn_fermer');
+			           local_text_prompt_btn_fermer.innerHTML = text_prompt_btn_fermer;
+					   
+					   var les_dates = document.querySelectorAll('input[type="datetime-local"]');
+
+					   if ( (les_dates.length == 1) || (les_dates.length == 2) )
+					   {
+					       div_prompt.appendChild(label_dates);
+			               div_prompt.appendChild(dates);
+					   }
+					}
+					
+					if ( (date_time_first[0] == "heure_debut") && (date_time_first[1] == "heure_fin") )
+					{  
+                       div_prompt.removeChild(div_prompt.childNodes[0]); 
+					
+					   prompt_btn.style.display = "none";
+		               btn_text.style.display = "none";
+			           btn_checkbox.style.display = "none";
+			           btn_radio.style.display = "none";
+			           btn_file.style.display = "none";
+			           btn_date.style.display = "none";
+			           btn_image.style.display = "none";
+			           btn_time.style.display = "none";
+			           btn_datetime.style.display = "none";
+			           btn_email.style.display = "none";
+			           btn_password.style.display = "none";
+			           prompt_valider_flux_texte.style.display = "none";
+			           prompt_valider_flux_date.style.display = "none";
+			           prompt_valider_flux_time.style.display = "none";
+			           prompt_valider_flux_datetime.style.display = "none";
+					
+					   alert_btn.style.display = "none";
+					   input_file.style.display = "none";
+					   input_datetime.style.display = "none";
+					   input_select.style.display = "none";
+					   input_text.style.display = "none";
+					   input_file.style.display = "none";
+					   input_checkbox_div.style.display = "none";
+					   input_radio_div.style.display = "none";
+					   input_datetime.style.display = "none";
+					   input_date.style.display = "none";
+					   input_time.style.display = "none";
+					  
+					   prompt_content.style.display = "block";
+			           prompt_content.innerHTML = global_text_content;
+			           div_prompt.style.display = "block";
+					   label_dates = document.createElement("label");
+					   label_dates.setAttribute("name", date_time_first[k]);
+					   label_dates.setAttribute("required", "required");
+					   label_dates.innerHTML = date_time_second[k];
+					   dates = document.createElement("input");
+					   dates.style.marginRight = "25px";
+					   label_dates.style.marginRight = "25px";
+					   dates.setAttribute("type", "time");
+					   dates.setAttribute("class","form-control");
+					   dates.setAttribute("id", date_time_second[k]);
+					   dates.setAttribute("required", "required");   
+					   prompt_btn.style.display = "block";
+					   prompt_valider_flux_time.style.display = "block";
+					   prompt_valider_flux_time.innerHTML = prompt_valider_flux_text;
+			           local_text_prompt_btn_fermer = document.getElementById('prompt_btn_fermer');
+			           local_text_prompt_btn_fermer.innerHTML = text_prompt_btn_fermer;
+					   
+					   var les_dates = document.querySelectorAll('input[type="time"]');
+
+					   if ( (les_dates.length == 1) || (les_dates.length == 2) )
+					   {
+					       div_prompt.appendChild(label_dates);
+			               div_prompt.appendChild(dates);
+					   }
+					}	
+			}
+ 
+		}
+		
+		if (   (type_input.indexOf(":")!=-1) && (type_input.indexOf(",")!=-1) && (type_input.indexOf(";")!=-1)  ) 
+		
+		    { 
+		      div_confirm.style.display = "none";
+		      confirm_btn.style.display = "none";
+		      div_alert.style.display = "none";
+		      flux_texte_variable = type_input.split(":");
+              text_multiple.innerHTML = "";
+			
+			for (var i=0; i<flux_texte_variable.length; i++)
+			{
+			
+			  flux_texte_first = flux_texte_variable[0];
+			  global_type_input = flux_texte_first;
+			  flux_texte_second = flux_texte_variable[1];
+			  flux_texte_third = flux_texte_second.split(";"); 
+			  text_multiple.innerHTML = "";
+			  
+			  for(var j=0; j<flux_texte_third.length; j++)
+			  {
+			     flux_bloc_1 = flux_texte_third[j].toString();
+				 flux_texte_bloc_1 = flux_bloc_1.split(",");
+
+				 for(var x=0; x<flux_texte_bloc_1.length; x++)
+				 {   
+				     div_prompt.removeChild(div_prompt.childNodes[0]); 
+                     prompt_btn.style.display = "none";
+		             btn_text.style.display = "none";
+			         btn_checkbox.style.display = "none";
+			         btn_radio.style.display = "none";
+			         btn_file.style.display = "none";
+			         btn_date.style.display = "none";
+			         btn_image.style.display = "none";
+			         btn_time.style.display = "none";
+			         btn_datetime.style.display = "none";
+			         btn_email.style.display = "none";
+			         btn_password.style.display = "none";
+			         prompt_valider_flux_date.style.display = "none";
+			         prompt_valider_flux_time.style.display = "none";
+			         prompt_valider_flux_datetime.style.display = "none";
+					 alert_btn.style.display = "none";
+				 
+					 prompt_content.style.display = "block";
+					 btn_text.style.display = "none";
+			         div_prompt.style.display = "block";
+			         div_alert.style.display = "none";
+					 div_confirm.style.display = "none";
+					 prompt_valider_flux_texte.style.display = "block";
+					 prompt_valider_flux_texte.innerHTML = text_prompt_btn_input_text_valider;
+					 btn_select.style.display = "none";
+					 prompt_content.style.display = "block";
+			         prompt_content.innerHTML = global_text_content;
+			         div_prompt.style.display = "block"; 
+					 input_text = document.createElement('input');
+					 input_text.appendChild(document.createTextNode (" "));
+					 input_text.setAttribute("maxlength",flux_texte_bloc_1[2]);
+					 input_text.setAttribute("class","form-control");
+					 input_text.setAttribute("size",flux_texte_bloc_1[2]);
+					 label_text_multiple = document.createElement('label');
+					 input_text.setAttribute("type", "text");
+					 input_text.style.marginRight = "30px";
+					 input_text.style.display = "block";
+					 input_text.setAttribute("required", "required");
+					 input_text.setAttribute("name",flux_texte_bloc_1[1]);
+					 input_text.setAttribute("id",flux_texte_bloc_1[0]);
+					 label_text_multiple.innerHTML = flux_texte_bloc_1[0];
+      
+				 }  
+				    text_multiple.appendChild(label_text_multiple);
+					text_multiple.appendChild(input_text);
+					tableau_flux = text_multiple.innerHTML;
+					text_multiple.innerHTML = tableau_flux;
+			        div_prompt.innerHTML = tableau_flux;
+					div_prompt.appendChild(prompt_content);	
+							
+			  }
+
+			}       
+					prompt_btn.style.display = "block";
+			        local_text_prompt_btn_fermer = document.getElementById('prompt_btn_fermer');
+			        local_text_prompt_btn_fermer.innerHTML = text_prompt_btn_fermer;
+			
+		}
+		
+		if (type_input.indexOf(":") == -1) 
+		{
+          global_type_input = type_input;  
+		} 
+
+		global_flux_select = flux_select;
+		global_type_dialog = type_dialog;
+		global_position = position;
+		global_x = x;
+		global_y = y;	
+		//Initialisation affichage et en fournissant la fonction Handler Evenement pour l'interception du Résultat
+	    $dialog = document.getElementById('mydialog');
+		$dialog.style.top = global_x;
+		$dialog.style.left = global_y;
+		
+		if (global_position == 'haut')
+		{
+		   $dialog.style.top = 20+"px";
+		   $dialog.style.left = 0+"px";
+		}
+		
+		if (global_position == 'bas')
+		{
+		   $dialog.style.top = 700+"px";
+		   $dialog.style.left = 0+"px";
+		  
+		}
+		
+		if (global_position == 'centre' )
+		{
+		   $dialog.style.top = 300+"px";
+		   $dialog.style.left = 0+"px";
+		  
+		}
+		
+		if (global_position == 'gauche' )
+		{
+		   $dialog.style.top = 300+"px";
+		   $dialog.style.left = -55+"em";
+		  
+		}
+		
+		if (global_position == 'droite' )
+		{
+		   $dialog.style.top = 300+"px";
+		   $dialog.style.left = 70+"%";
+		  
+		}
+		//fenetre de type prompt
+			
+		if (global_type_dialog == 'prompt') 
+		{
+		   div_confirm.style.display = "none";
+		   confirm_btn.style.display = "none";
+		   div_alert.style.display = "none";
+		   if(global_type_input  == "image") 
+		   {   
+		       div_prompt.removeChild(div_prompt.childNodes[0]); 
+               prompt_btn.style.display = "none";
+		       btn_text.style.display = "none";
+			   btn_checkbox.style.display = "none";
+			   btn_radio.style.display = "none";
+			   btn_file.style.display = "none";
+			   btn_date.style.display = "none";
+			   btn_time.style.display = "none";
+			   btn_datetime.style.display = "none";
+			   btn_email.style.display = "none";
+			   btn_password.style.display = "none";
+			   prompt_valider_flux_texte.style.display = "none";
+			   prompt_valider_flux_date.style.display = "none";
+			   prompt_valider_flux_time.style.display = "none";
+			   prompt_valider_flux_datetime.style.display = "none";
+
+		      alert_btn.style.display = "none";
+		      input_file.style.display = "none";
+		      input_datetime.style.display = "none";
+			  input_select.style.display = "none";
+			  input_text.style.display = "none";
+			  input_file.style.display = "none";
+			  input_checkbox_div.style.display = "none";
+			  input_radio_div.style.display = "none";
+			  input_datetime.style.display = "none";
+			  input_date.style.display = "none";
+			  input_time.style.display = "none";
+		      div_prompt.style.display = "block";
+			  input_image.style.display = "block";
+			  prompt_btn.style.display = "block";
+			  btn_image.style.display = "block";
+			  btn_image.innerHTML = text_prompt_btn_checkbox_valider;
+			  prompt_content.innerHTML = input_image.src;
+			  prompt_content.innerHTML = global_text_content;
+		   }
+		   
+		   if(global_type_input  == "date")
+		   {  
+		       div_prompt.removeChild(div_prompt.childNodes[0]); 
+		       prompt_btn.style.display = "none";
+		       btn_text.style.display = "none";
+			   btn_checkbox.style.display = "none";
+			   btn_radio.style.display = "none";
+			   btn_file.style.display = "none";
+			   btn_image.style.display = "none";
+			   btn_time.style.display = "none";
+			   btn_datetime.style.display = "none";
+			   btn_email.style.display = "none";
+			   btn_password.style.display = "none";
+			   prompt_valider_flux_texte.style.display = "none";
+			   prompt_valider_flux_date.style.display = "none";
+			   prompt_valider_flux_time.style.display = "none";
+			   prompt_valider_flux_datetime.style.display = "none";
+			 
+		      alert_btn.style.display = "none";
+		      input_file.style.display = "none";
+			  input_image.style.display = "none";
+		      input_datetime.style.display = "none";
+			  input_select.style.display = "none";
+			  input_text.style.display = "none";
+			  input_file.style.display = "none";
+			  input_checkbox_div.style.display = "none";
+			  input_radio_div.style.display = "none";
+			  input_time.style.display = "none";
+		      div_prompt.style.display = "block";
+			  input_date.style.display = "block";
+			  prompt_btn.style.display = "block";
+			  btn_date.style.display = "block";
+			  btn_date.innerHTML = text_prompt_btn_checkbox_valider;
+			  prompt_content.innerHTML = global_text_content;
+		    }
+			
+			if(global_type_input  == "time")
+			{ 
+			   div_prompt.removeChild(div_prompt.childNodes[0]); 
+			   prompt_btn.style.display = "none";
+		       btn_text.style.display = "none";
+			   btn_checkbox.style.display = "none";
+			   btn_radio.style.display = "none";
+			   btn_file.style.display = "none";
+			   btn_date.style.display = "none";
+			   btn_image.style.display = "none";
+			   btn_datetime.style.display = "none";
+			   btn_email.style.display = "none";
+			   btn_password.style.display = "none";
+			   prompt_valider_flux_texte.style.display = "none";
+			   prompt_valider_flux_date.style.display = "none";
+			   prompt_valider_flux_time.style.display = "none";
+			   prompt_valider_flux_datetime.style.display = "none";
+			  
+			  alert_btn.style.display = "none";
+			  input_file.style.display = "none";
+			  input_image.style.display = "none";
+			  input_datetime.style.display = "none";
+			  input_select.style.display = "none";
+			  input_text.style.display = "none";
+			  input_file.style.display = "none";
+			  input_checkbox_div.style.display = "none";
+			  input_radio_div.style.display = "none";
+			  input_datetime.style.display = "none";
+			  input_date.style.display = "none";
+		      div_prompt.style.display = "block";
+			  input_time.style.display = "block";
+			  prompt_btn.style.display = "block";
+			  btn_time.style.display = "block";
+			  btn_time.innerHTML = text_prompt_btn_checkbox_valider;
+			  prompt_content.innerHTML = global_text_content;
+		    }
+			
+			if(global_type_input  == "datetime")
+			{  
+			   div_prompt.removeChild(div_prompt.childNodes[0]); 
+			   prompt_btn.style.display = "none";
+		       btn_text.style.display = "none";
+			   btn_checkbox.style.display = "none";
+			   btn_radio.style.display = "none";
+			   btn_file.style.display = "none";
+			   btn_date.style.display = "none";
+			   btn_image.style.display = "none";
+			   btn_time.style.display = "none";
+			   btn_email.style.display = "none";
+			   btn_password.style.display = "none";
+			   prompt_valider_flux_texte.style.display = "none";
+			   prompt_valider_flux_date.style.display = "none";
+			   prompt_valider_flux_time.style.display = "none";
+			   prompt_valider_flux_datetime.style.display = "none";
+			
+			  alert_btn.style.display = "none";
+			  div_alert.style.display = "none";
+			  input_file.style.display = "none";
+			  input_image.style.display = "none";
+			  input_datetime.style.display = "none";
+			  input_select.style.display = "none";
+			  input_text.style.display = "none";
+			  input_file.style.display = "none";
+			  input_checkbox_div.style.display = "none";
+			  input_radio_div.style.display = "none";
+			  input_date.style.display = "none";
+			  input_time.style.display = "none";
+			  input_select.style.display = "none";
+		      div_prompt.style.display = "none";
+			  div_alert.style.display = "none";
+			  div_confirm.style.display = "none";
+		      input_checkbox_fieldset.style.display = "none";
+			  input_checkbox_legend.style.display = "none";
+			  input_checkbox_div.style.display = "none";
+			  prompt_btn.style.display = "none";
+			  btn_checkbox.style.display = "none";
+			
+			  input_time.style.display = "none";
+		      div_prompt.style.display = "block";
+			  input_datetime.style.display = "block";
+			  prompt_btn.style.display = "block";
+			  btn_datetime.style.display = "block";
+			  btn_datetime.innerHTML = text_prompt_btn_checkbox_valider;
+			  prompt_content.innerHTML = global_text_content;
+		    }
+		
+		   if(global_type_input == "file") 
+		   {   
+		       div_prompt.removeChild(div_prompt.childNodes[0]); 
+		       prompt_btn.style.display = "none";
+		       btn_text.style.display = "none";
+			   btn_checkbox.style.display = "none";
+			   btn_radio.style.display = "none";
+			   btn_date.style.display = "none";
+			   btn_image.style.display = "none";
+			   btn_time.style.display = "none";
+			   btn_datetime.style.display = "none";
+			   btn_email.style.display = "none";
+			   btn_password.style.display = "none";
+			   prompt_valider_flux_texte.style.display = "none";
+			   prompt_valider_flux_date.style.display = "none";
+			   prompt_valider_flux_time.style.display = "none";
+			   prompt_valider_flux_datetime.style.display = "none";
+		   
+		      alert_btn.style.display = "none";
+		      input_datetime.style.display = "none";
+			  input_image.style.display = "none";
+			  input_select.style.display = "none";
+			  input_text.style.display = "none";
+			  input_file.style.display = "none";
+			  input_checkbox_div.style.display = "none";
+			  input_radio_div.style.display = "none";
+			  input_datetime.style.display = "none";
+			  input_date.style.display = "none";
+			  input_time.style.display = "none";
+			  input_password.style.display = "none";
+			  input_email.style.display = "none"; 
+			  input_select.style.display = "none";
+			  input_text.style.display = "none";
+			  div_prompt.style.display = "block";
+			  input_file.style.display = "block";
+			  prompt_btn.style.display = "block";
+			  btn_file.style.display = "block";
+			  btn_file.innerHTML = text_prompt_btn_checkbox_valider;
+			  prompt_content.innerHTML = global_text_content;
+			}
+		   
+		   if(global_type_input == "radio")
+		   { 
+		   
+		       div_prompt.removeChild(div_prompt.childNodes[0]); 
+		       prompt_btn.style.display = "none";
+		       btn_text.style.display = "none";
+			   btn_checkbox.style.display = "none";
+			   btn_file.style.display = "none";
+			   btn_date.style.display = "none";
+			   btn_image.style.display = "none";
+			   btn_time.style.display = "none";
+			   btn_datetime.style.display = "none";
+			   btn_email.style.display = "none";
+			   btn_password.style.display = "none";
+			   prompt_valider_flux_texte.style.display = "none";
+			   prompt_valider_flux_date.style.display = "none";
+			   prompt_valider_flux_time.style.display = "none";
+			   prompt_valider_flux_datetime.style.display = "none";
+
+		      alert_btn.style.display = "none";
+		      input_datetime.style.display = "none";
+			  input_image.style.display = "none";
+			  input_select.style.display = "none";
+			  input_text.style.display = "none";
+			  input_file.style.display = "none";
+			  input_checkbox_div.style.display = "none";
+			  input_datetime.style.display = "none";
+			  input_date.style.display = "none";
+			  input_time.style.display = "none";
+			  input_password.style.display = "none";
+			  input_email.style.display = "none"; 
+			  input_select.style.display = "none";
+			  input_text.style.display = "none";
+		      input_image.style.display = "none";
+		      div_prompt.style.display = "block";
+			  div_alert.style.display = "none";
+			  div_confirm.style.display = "none";
+		      input_radio_fieldset.style.display = "block";
+			  input_radio_legend.style.display = "block";
+			  input_radio_div.style.display = "block";
+			  prompt_btn.style.display = "block";
+			  btn_radio.style.display = "block";
+			  btn_radio.innerHTML = text_prompt_btn_checkbox_valider;
+			  options = global_flux_select.split(";");
+			  input_radio_div.innerHTML = "";
+			  for ( var i=0;i<options.length;i++)
+			  {     
+					input_radio = document.createElement('input');
+					input_radio.setAttribute("type", "radio");
+					input_radio.setAttribute("name","radio");
+					input_radio.setAttribute("value",options[i]);
+					label_input = document.createElement('label');
+					label_input.innerHTML = "&nbsp;&nbsp;"+options[i]+"&nbsp;&nbsp;";
+					br = document.createElement("br");
+					div.appendChild(input_radio);
+					div.appendChild(label_input);
+					div.appendChild(br);
+					input_radio_div.innerHTML = div.innerHTML;
+		      }
+			   prompt_content.innerHTML = global_text_content;
+		   }
+ 
+		   if(global_type_input == "checkbox")
+		   {   
+		      div_prompt.removeChild(div_prompt.childNodes[0]); 
+              prompt_btn.style.display = "none";
+		      btn_text.style.display = "none";
+			  btn_radio.style.display = "none";
+			  btn_file.style.display = "none";
+			  btn_date.style.display = "none";
+			  btn_image.style.display = "none";
+			  btn_time.style.display = "none";
+			  btn_datetime.style.display = "none";
+			  btn_email.style.display = "none";
+			  btn_password.style.display = "none";
+			  prompt_valider_flux_texte.style.display = "none";
+			  prompt_valider_flux_date.style.display = "none";
+			  prompt_valider_flux_time.style.display = "none";
+			  prompt_valider_flux_datetime.style.display = "none";
+		   
+              alert_btn.style.display = "none";		   
+		      input_datetime.style.display = "none";
+			  input_image.style.display = "none";
+			  input_select.style.display = "none";
+			  input_text.style.display = "none";
+			  input_file.style.display = "none";
+			  input_radio_div.style.display = "none";
+			  input_datetime.style.display = "none";
+			  input_date.style.display = "none";
+			  input_time.style.display = "none";
+			  input_password.style.display = "none";
+			  input_email.style.display = "none"; 
+			  input_select.style.display = "none";
+			  input_text.style.display = "none";
+			  input_select.style.display = "none";
+		      div_prompt.style.display = "block";
+			  div_alert.style.display = "none";
+			  div_confirm.style.display = "none";
+		      input_checkbox_fieldset.style.display = "block";
+			  input_checkbox_legend.style.display = "block";
+			  input_checkbox_div.style.display = "block";
+			  prompt_btn.style.display = "block";
+			  btn_checkbox.style.display = "block";
+			  btn_checkbox.innerHTML = text_prompt_btn_checkbox_valider;
+			  options = global_flux_select.split(";");
+			  input_checkbox_div.innerHTML = "";
+			  for ( var i=0;i<options.length;i++ ){
+      
+					input_checkbox = document.createElement('input');
+					div = document.createElement('div');
+					input_checkbox.setAttribute("type", "checkbox");
+					input_checkbox.setAttribute("name","checkbox");
+					input_checkbox.setAttribute("value",options[i]);
+					label_input = document.createElement('label');
+					label_input.marginRight = "10px";
+					label_input.innerHTML = "&nbsp;&nbsp;"+options[i]+"&nbsp;&nbsp;";
+					div.appendChild(input_checkbox);
+					div.appendChild(label_input);
+					input_checkbox_div.innerHTML += div.innerHTML + "<br>";			
+		      }
+              
+			  prompt_content.innerHTML = global_text_content;
+			  
+		   }
+		   
+		   if (global_type_input == "text")
+		   { 
+               div_prompt.removeChild(div_prompt.childNodes[0]); 
+               prompt_btn.style.display = "none";
+			   btn_checkbox.style.display = "none";
+			   btn_radio.style.display = "none";
+			   btn_file.style.display = "none";
+			   btn_date.style.display = "none";
+			   btn_image.style.display = "none";
+			   btn_time.style.display = "none";
+			   btn_datetime.style.display = "none";
+			   btn_email.style.display = "none";
+			   btn_password.style.display = "none";
+			   prompt_valider_flux_texte.style.display = "none";
+			   prompt_valider_flux_date.style.display = "none";
+			   prompt_valider_flux_time.style.display = "none";
+			   prompt_valider_flux_datetime.style.display = "none";
+		   
+		       alert_btn.style.display = "none";
+		       input_datetime.style.display = "none";
+			   input_image.style.display = "none";
+			   input_select.style.display = "none";
+			   input_text.style.display = "none";
+			   input_file.style.display = "none";
+			   input_checkbox_div.style.display = "none";
+			   input_radio_div.style.display = "none";
+			   input_datetime.style.display = "none";
+			   input_date.style.display = "none";
+			   input_time.style.display = "none";
+			   input_password.style.display = "none";
+			   input_email.style.display = "none"; 
+			   input_select.style.display = "none";
+			   input_text.style.display = "none";
+		       input_password.style.display = "none";
+			   input_email.style.display = "none";
+			   div_prompt.style.display = "block";
+			   div_alert.style.display = "none";
+			   div_confirm.style.display = "none";
+			   prompt_btn.style.display = "block";
+			   input_text.style.display = "block";
+			   btn_text.style.display = "block";
+			   btn_select.style.display = "none";
+			   local_text_prompt_btn_input_text_valider = document.getElementById('prompt_btn_text');
+			   local_text_prompt_btn_input_text_valider.innerHTML = text_prompt_btn_input_text_valider;
+			   prompt_content.innerHTML = global_text_content;		    
+		   }
+		   
+		   if (global_type_input == "password") 
+		   {  
+               div_prompt.removeChild(div_prompt.childNodes[0]); 
+               prompt_btn.style.display = "none";
+		       btn_text.style.display = "none";
+			   btn_checkbox.style.display = "none";
+			   btn_radio.style.display = "none";
+			   btn_file.style.display = "none";
+			   btn_date.style.display = "none";
+			   btn_image.style.display = "none";
+			   btn_time.style.display = "none";
+			   btn_datetime.style.display = "none";
+			   btn_email.style.display = "none";
+			   prompt_valider_flux_texte.style.display = "none";
+			   prompt_valider_flux_date.style.display = "none";
+			   prompt_valider_flux_time.style.display = "none";
+			   prompt_valider_flux_datetime.style.display = "none";
+		   
+		       alert_btn.style.display = "none";
+		       alert_btn.style.display = "none";
+		       div_alert.style.display = "none";
+		       input_datetime.style.display = "none";
+			   input_image.style.display = "none";
+			   input_select.style.display = "none";
+			   input_text.style.display = "none";
+			   input_file.style.display = "none";
+			   input_checkbox_div.style.display = "none";
+			   input_radio_div.style.display = "none";
+			   input_datetime.style.display = "none";
+			   input_date.style.display = "none";
+			   input_time.style.display = "none";
+			   input_email.style.display = "none"; 
+			   input_select.style.display = "none";
+			   input_text.style.display = "none";
+		       input_radio_div.style.display = "none";
+		       div_prompt.style.display = "block";
+			   div_alert.style.display = "none";
+			   div_confirm.style.display = "none";
+			   prompt_btn.style.display = "block";
+			   input_password.style.display = "block";
+			   btn_password.style.display = "block";
+			   btn_select.style.display = "none";
+			   local_text_prompt_btn_input_text_valider = document.getElementById('prompt_btn_password');
+			   local_text_prompt_btn_input_text_valider.innerHTML = text_prompt_btn_input_text_valider;
+			   prompt_content.innerHTML = global_text_content;
+		   }
+		   
+		   if (global_type_input == "email")
+		   
+		   {   
+		       div_prompt.removeChild(div_prompt.childNodes[0]); 
+		       prompt_btn.style.display = "none";
+		       btn_text.style.display = "none";
+			   btn_checkbox.style.display = "none";
+			   btn_radio.style.display = "none";
+			   btn_file.style.display = "none";
+			   btn_date.style.display = "none";
+			   btn_image.style.display = "none";
+			   btn_time.style.display = "none";
+			   btn_datetime.style.display = "none";
+			   btn_password.style.display = "none";
+			   prompt_valider_flux_texte.style.display = "none";
+			   prompt_valider_flux_date.style.display = "none";
+			   prompt_valider_flux_time.style.display = "none";
+			   prompt_valider_flux_datetime.style.display = "none";
+		   
+		       alert_btn.style.display = "none";
+		       input_datetime.style.display = "none";
+			   input_image.style.display = "none";
+			   input_select.style.display = "none";
+			   input_text.style.display = "none";
+			   input_file.style.display = "none";
+			   input_checkbox_div.style.display = "none";
+			   input_radio_div.style.display = "none";
+			   input_datetime.style.display = "none";
+			   input_date.style.display = "none";
+			   input_time.style.display = "none";
+			   input_password.style.display = "none";
+			   input_select.style.display = "none";
+			   input_text.style.display = "none";
+		       input_password.style.display = "none";
+		       div_prompt.style.display = "block";
+			   div_alert.style.display = "none";
+			   div_confirm.style.display = "none";
+			   prompt_btn.style.display = "block";
+			   input_email.style.display = "block";
+			   btn_email.style.display = "block";
+			   btn_select.style.display = "none";
+			   local_text_prompt_btn_input_text_valider = document.getElementById('prompt_btn_email');
+			   local_text_prompt_btn_input_text_valider.innerHTML = text_prompt_btn_input_text_valider;
+			   prompt_content.innerHTML = global_text_content;
+		   }
+		   
+		   if (global_type_input == "select")
+		   {  
+		       div_prompt.removeChild(div_prompt.childNodes[0]); 
+               prompt_btn.style.display = "none";
+		       btn_text.style.display = "none";
+			   btn_checkbox.style.display = "none";
+			   btn_radio.style.display = "none";
+			   btn_file.style.display = "none";
+			   btn_date.style.display = "none";
+			   btn_image.style.display = "none";
+			   btn_time.style.display = "none";
+			   btn_datetime.style.display = "none";
+			   btn_email.style.display = "none";
+			   btn_password.style.display = "none";
+			   prompt_valider_flux_texte.style.display = "none";
+			   prompt_valider_flux_date.style.display = "none";
+			   prompt_valider_flux_time.style.display = "none";
+			   prompt_valider_flux_datetime.style.display = "none";
+		   
+		       alert_btn.style.display = "none";
+		       input_datetime.style.display = "none";
+			   input_image.style.display = "none";
+			   input_text.style.display = "none";
+			   input_file.style.display = "none";
+			   input_checkbox_div.style.display = "none";
+			   input_radio_div.style.display = "none";
+			   input_datetime.style.display = "none";
+			   input_date.style.display = "none";
+			   input_time.style.display = "none";
+			   input_password.style.display = "none";
+			   input_email.style.display = "none"; 
+			   input_select.style.display = "none";
+			   input_text.style.display = "none";
+			   div_prompt.style.display = "block";
+			   div_alert.style.display = "none";
+			   div_confirm.style.display = "none";
+			   prompt_content.style.display = "block";
+			   prompt_btn.style.display = "block";
+			   input_select.style.display = "block";
+			   btn_select.style.display = "block";
+			   btn_text.style.display = "none";
+			   options = global_flux_select.split(";");
+		      // Initialiser le selectbox à vide
+			   input_select.length = 1;
+	          // Créer les balises option et les charger dans la balise select
+			   for ( var i=0;i<options.length;i++)
+			   {
+					opt = document.createElement("option");
+					opt.innerHTML = options[i];
+					input_select.setAttribute("class","form-control");
+					input_select.style.width = '220px';
+					opt.value = options[i];
+					input_select.appendChild(opt);
+		        }
+				
+			   local_text_prompt_btn_select_valider = document.getElementById('prompt_btn_select');
+			   local_text_prompt_btn_select_valider.innerHTML = text_prompt_btn_select_valider; 
+			   prompt_content.innerHTML = global_text_content;
+			   local_text_prompt_btn_fermer = document.getElementById('prompt_btn_fermer');
+			   local_text_prompt_btn_fermer.innerHTML = text_prompt_btn_fermer;
+		   
+		   }	
+			
+		}
+		// fenetre de type alert
+		
+		if (global_type_dialog == 'alert') 
+		{
+		    div_prompt.removeChild(div_prompt.childNodes[0]); 
+		    prompt_btn.style.display = "none";
+		    btn_text.style.display = "none";
+			btn_select.style.display = "none";
+			btn_checkbox.style.display = "none";
+			btn_radio.style.display = "none";
+			btn_file.style.display = "none";
+			btn_date.style.display = "none";
+			btn_image.style.display = "none";
+			btn_time.style.display = "none";
+			btn_datetime.style.display = "none";
+			btn_email.style.display = "none";
+			btn_password.style.display = "none";
+			prompt_valider_flux_texte.style.display = "none";
+			prompt_valider_flux_date.style.display = "none";
+			prompt_valider_flux_time.style.display = "none";
+			prompt_valider_flux_datetime.style.display = "none";
+		
+		    div_confirm.style.display = "none";
+		    confirm_btn.style.display = "none"
+		    div_prompt.style.display = "none";
+		    div_alert.style.display = "block";
+		    div_confirm.style.display = "none";
+			alert_btn.style.display = "block";
+			alert_content.innerHTML = global_text_content;
+			local_text_alert_btn_ok = document.getElementById('alert_btn_ok');
+			local_text_alert_btn_ok.innerHTML = text_alert_btn_ok;
+
+		}
+		// fenetre de type confirm
+		
+		if (global_type_dialog == 'confirm') 
+		{
+		    div_prompt.removeChild(div_prompt.childNodes[0]); 
+		    prompt_btn.style.display = "none";
+			alert_btn.style.display = "none";
+		    btn_text.style.display = "none";
+			btn_select.style.display = "none";
+			btn_checkbox.style.display = "none";
+			btn_radio.style.display = "none";
+			btn_file.style.display = "none";
+			btn_date.style.display = "none";
+			btn_image.style.display = "none";
+			btn_time.style.display = "none";
+			btn_datetime.style.display = "none";
+			btn_email.style.display = "none";
+			btn_password.style.display = "none";
+			prompt_valider_flux_texte.style.display = "none";
+			prompt_valider_flux_date.style.display = "none";
+			prompt_valider_flux_time.style.display = "none";
+			prompt_valider_flux_datetime.style.display = "none";
+
+		   div_prompt.style.display = "none";
+		   div_alert.style.display = "none";
+		   div_confirm.style.display = "block";
+		   confirm_btn.style.display = "block";
+		   alert_btn.style.display = "none";
+		   confirm_content.innerHTML = global_text_content;
+		   local_text_confirm_btn_annuler = document.getElementById('confirm_btn_annuler');
+		   local_text_confirm_btn_annuler.innerHTML = text_confirm_btn_annuler;
+		   local_text_confirm_btn_valider = document.getElementById('confirm_btn_valider');
+		   local_text_confirm_btn_valider.innerHTML = text_confirm_btn_valider;
+
+		} 
+		local_text_prompt_btn_fermer = document.getElementById('prompt_btn_fermer');
+		local_text_prompt_btn_fermer.innerHTML = text_prompt_btn_fermer;
+		// Déclencher 	MyDoEvents() tous les 500 ms  
+	    Id_setInterval = setInterval("MyDoEvents()", 500);
+	    Id_setInterval_scan = setInterval(handler_scan, 500);
+		// setTimeout("InternePromptSaisieData()", 1000);			  
+					
+		return true;	
+	}
+	
+	function MyDoEvents()
+	{
+	 // Initialisation de l'interface pour la 1ère fois
+	 if ( Isopen == "non")
+     {	 
+	  ProcessInitializeIHM(); 
+	  // this.Refresh;
+	  return false;
+	 }
+	 
+	 if (return_value != "-1") 	
+	 {
+	  clearInterval(Id_setInterval);
+	  //console.log("return_value - Interface validé="+return_value);
+	  return true;
+	  
+	 }
+	 else
+	 {
+ 	 //console.log("return_value - Interface non validé ="+return_value);
+	 return false; 
+	 
+	 }
+	 
+	}
+	
+	function ProcessInitializeIHM()
+	{
+	   //-------- 
+	   //-------- initialisation du contexte de la fenêtre Modal
+            	 
+	     $dialog = document.getElementById('mydialog');
+		 return_value = "-1";
+		 
+		 $dialog.addEventListener('close', 
+											function() 
+											{
+											 // console.log('Fermeture. ', this.returnValue);
+											 // Isopen = "non";
+											 //alert(" valeur de retour : "+this.returnValue);
+											 return_value = this.returnValue;
+											 $dialog.style.display  = "none";
+											 $dialog.style.position = "absolute";
+											 //$dialog.style.z-index = "1";
+											 //this.close();
+											}
+		                         );
+		 
+		 
+		 Isopen = "oui";
+		 //$dialog.style.display  = "none";
+		 $dialog.showModal();
+       //-------- 
+       //-------- 	    	   	     	 
+	}
+	
+</script>
+<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!--  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->		
+	
+  </body>
+</html>
